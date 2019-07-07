@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!-- 自动扫描  @Controller-->
+ 
+    
+    <context:component-scan base-package="cn.com.lingnan.controller">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+
+  <!-- 支持json中文 -->  
+      <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+            <property name="supportedMediaTypes">  
+                <list>  
+                    <value>text/plain;charset=UTF-8</value>  
+                    <value>text/html;charset=UTF-8</value>  
+                </list>  
+            </property>  
+        </bean>  
+        <bean  
+            class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+            <property name="supportedMediaTypes">  
+                <list>  
+                    <value>application/json; charset=UTF-8</value>  
+                    <value>application/x-www-form-urlencoded; charset=UTF-8</value>  
+                </list>  
+            </property>  
+        </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    
+
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<!-- 后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	
+	<!-- 配置静态资源，防止被springmvc过滤 -->
+	<mvc:resources location="/" mapping="/**/*.html" />
+	<mvc:resources location="/" mapping="/**/*.js" />
+	<mvc:resources location="/" mapping="/**/*.css" />
+	<mvc:resources location="/" mapping="/**/*.png" />
+	<mvc:resources location="/" mapping="/**/*.gif" />
+	<mvc:resources location="/" mapping="/**/*.woff" />
+	<mvc:resources location="/" mapping="/**/*.ttf" />
+	<mvc:resources location="/" mapping="/**/*.jpg" />
+	<mvc:resources location="/" mapping="/**/*.mp3" />
+	<mvc:resources location="/" mapping="/**/*.mp4" />
+	<mvc:resources location="/" mapping="/**/*.json" />
+	
+	
+		<!-- 配置全局异常处理器 -->
+	<!-- <bean id="customerExceptionResolver" class="cn.com.lingnan.exception.CustomerExceptionResolver"/> -->
+
+
+    <!-- 文件上传配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 上传文件大小限制为100M，10*1024*1024*1024 -->
+        <property name="maxUploadSize" value="10737418240"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="4096"/>
+    </bean>
+</beans>

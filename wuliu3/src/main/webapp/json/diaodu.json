@@ -1,0 +1,8 @@
+[
+
+		{ "id":"131", "pId":"0", "name":"查台转单","page":"/workbill/chaTai"},
+		{ "id":"132", "pId":"0", "name":"人工调度","page":"/workbill/diaoDu"},
+		{ "id":"133", "pId":"0", "name":"工作单快速录入" ,"page":"/workorder/findBypageUi"},
+		{ "id":"134", "pId":"0", "name":"工作单操作" ,"page":"/workorder/findBypageUiNormal"}
+
+]

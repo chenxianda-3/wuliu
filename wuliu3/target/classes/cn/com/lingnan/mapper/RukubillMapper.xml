@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.RukubillMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Rukubill" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="jiehuotime" property="jiehuotime" jdbcType="TIMESTAMP" />
+    <result column="jiehuopeople" property="jiehuopeople" jdbcType="VARCHAR" />
+    <result column="jiehuostation" property="jiehuostation" jdbcType="VARCHAR" />
+    <result column="fahuopeople" property="fahuopeople" jdbcType="VARCHAR" />
+    <result column="fahuostation" property="fahuostation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, jiehuotime, jiehuopeople, jiehuostation, fahuopeople, fahuostation
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.RukubillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rukubill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from rukubill
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rukubill
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.RukubillExample" >
+    delete from rukubill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Rukubill" >
+    insert into rukubill (id, jiehuotime, jiehuopeople, 
+      jiehuostation, fahuopeople, fahuostation
+      )
+    values (#{id,jdbcType=VARCHAR}, #{jiehuotime,jdbcType=TIMESTAMP}, #{jiehuopeople,jdbcType=VARCHAR}, 
+      #{jiehuostation,jdbcType=VARCHAR}, #{fahuopeople,jdbcType=VARCHAR}, #{fahuostation,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Rukubill" >
+    insert into rukubill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jiehuotime != null" >
+        jiehuotime,
+      </if>
+      <if test="jiehuopeople != null" >
+        jiehuopeople,
+      </if>
+      <if test="jiehuostation != null" >
+        jiehuostation,
+      </if>
+      <if test="fahuopeople != null" >
+        fahuopeople,
+      </if>
+      <if test="fahuostation != null" >
+        fahuostation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jiehuotime != null" >
+        #{jiehuotime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jiehuopeople != null" >
+        #{jiehuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="jiehuostation != null" >
+        #{jiehuostation,jdbcType=VARCHAR},
+      </if>
+      <if test="fahuopeople != null" >
+        #{fahuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="fahuostation != null" >
+        #{fahuostation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.RukubillExample" resultType="java.lang.Integer" >
+    select count(*) from rukubill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rukubill
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jiehuotime != null" >
+        jiehuotime = #{record.jiehuotime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jiehuopeople != null" >
+        jiehuopeople = #{record.jiehuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jiehuostation != null" >
+        jiehuostation = #{record.jiehuostation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fahuopeople != null" >
+        fahuopeople = #{record.fahuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fahuostation != null" >
+        fahuostation = #{record.fahuostation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rukubill
+    set id = #{record.id,jdbcType=VARCHAR},
+      jiehuotime = #{record.jiehuotime,jdbcType=TIMESTAMP},
+      jiehuopeople = #{record.jiehuopeople,jdbcType=VARCHAR},
+      jiehuostation = #{record.jiehuostation,jdbcType=VARCHAR},
+      fahuopeople = #{record.fahuopeople,jdbcType=VARCHAR},
+      fahuostation = #{record.fahuostation,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Rukubill" >
+    update rukubill
+    <set >
+      <if test="jiehuotime != null" >
+        jiehuotime = #{jiehuotime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jiehuopeople != null" >
+        jiehuopeople = #{jiehuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="jiehuostation != null" >
+        jiehuostation = #{jiehuostation,jdbcType=VARCHAR},
+      </if>
+      <if test="fahuopeople != null" >
+        fahuopeople = #{fahuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="fahuostation != null" >
+        fahuostation = #{fahuostation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Rukubill" >
+    update rukubill
+    set jiehuotime = #{jiehuotime,jdbcType=TIMESTAMP},
+      jiehuopeople = #{jiehuopeople,jdbcType=VARCHAR},
+      jiehuostation = #{jiehuostation,jdbcType=VARCHAR},
+      fahuopeople = #{fahuopeople,jdbcType=VARCHAR},
+      fahuostation = #{fahuostation,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

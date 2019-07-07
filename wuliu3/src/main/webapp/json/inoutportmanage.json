@@ -1,0 +1,5 @@
+[
+		{ "id":"1", "pId":"0", "name":"出港配载" ,"page":"/peizaiinfo/findBypageUi"},
+		{ "id":"2", "pId":"0", "name":"进港分单" ,"page":"/fendanbill/findBypageUi"}
+		
+]

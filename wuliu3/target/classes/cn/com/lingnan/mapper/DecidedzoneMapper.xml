@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.DecidedzoneMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Decidedzone" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+        	<!-- 与区域一对一 -->
+ 	<association property="region" javaType="Region">
+ 	 <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+ 	</association>
+ 	    	<!-- 与取派员一对一 -->
+ 	<association property="staff" javaType="Staff">
+    <result column="sname" property="name" jdbcType="VARCHAR" />
+ 	</association>
+ 	
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, staff_id, region_id, name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.DecidedzoneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from decidedzone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from decidedzone
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from decidedzone
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.DecidedzoneExample" >
+    delete from decidedzone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Decidedzone" >
+    insert into decidedzone (id, staff_id, region_id, 
+      name)
+    values (#{id,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{regionId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertBatch" parameterType="java.util.List"> 
+  insert into decidedzone (id, staff_id, region_id, name) values
+    <foreach collection="list" item="item" separator=",">
+  (#{item.id,jdbcType=VARCHAR}, #{item.staffId,jdbcType=VARCHAR}, #{item.regionId,jdbcType=VARCHAR}, 
+      #{item.name,jdbcType=VARCHAR})
+     </foreach>
+   ON DUPLICATE KEY UPDATE
+   id=VALUES(id),staff_id=VALUES(staff_id),region_id=VALUES(region_id),name=VALUES(name)
+   </insert>
+   
+  
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Decidedzone" >
+    insert into decidedzone
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.DecidedzoneExample" resultType="java.lang.Integer" >
+    select count(*) from decidedzone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  
+    <select id="selectDecidedzone" resultMap="BaseResultMap">
+     SELECT  d.*,r.`province`,r.`city`,r.`district`,s.`name` sname
+ FROM  decidedzone d LEFT JOIN region r ON  d.`region_id`=r.`id` LEFT JOIN  staff s ON d.`staff_id`=s.`id`
+  </select>
+  
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update decidedzone
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regionId != null" >
+        region_id = #{record.regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update decidedzone
+    set id = #{record.id,jdbcType=VARCHAR},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      region_id = #{record.regionId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Decidedzone" >
+    update decidedzone
+    <set >
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Decidedzone" >
+    update decidedzone
+    set staff_id = #{staffId,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

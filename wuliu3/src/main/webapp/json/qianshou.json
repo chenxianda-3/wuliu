@@ -1,0 +1,4 @@
+[
+		{ "id":"153", "pId":"0", "name":"签收单快速录入/新增","page":"/qianshoubill/findBypageUiOfQuick"},
+		{ "id":"154", "pId":"0", "name":"签收单操作","page":"/qianshoubill/findBypageUi"}
+]

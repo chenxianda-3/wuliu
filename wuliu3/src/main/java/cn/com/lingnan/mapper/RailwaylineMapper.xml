@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.RailwaylineMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Railwayline" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="trainnum" property="trainnum" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="transferpri" property="transferpri" jdbcType="VARCHAR" />
+    <result column="directpri" property="directpri" jdbcType="VARCHAR" />
+    <result column="startcity" property="startcity" jdbcType="VARCHAR" />
+    <result column="startstation" property="startstation" jdbcType="VARCHAR" />
+    <result column="outcenter" property="outcenter" jdbcType="VARCHAR" />
+    <result column="outpici" property="outpici" jdbcType="VARCHAR" />
+    <result column="checi" property="checi" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="TIME" />
+    <result column="endtime" property="endtime" jdbcType="TIME" />
+    <result column="tianshu" property="tianshu" jdbcType="VARCHAR" />
+    <result column="inpici" property="inpici" jdbcType="VARCHAR" />
+    <result column="intcenter" property="intcenter" jdbcType="VARCHAR" />
+    <result column="endcity" property="endcity" jdbcType="VARCHAR" />
+    <result column="endstation" property="endstation" jdbcType="VARCHAR" />
+    <result column="transfepici" property="transfepici" jdbcType="VARCHAR" />
+    <result column="transfercenter" property="transfercenter" jdbcType="VARCHAR" />
+    <result column="unitprice" property="unitprice" jdbcType="DOUBLE" />
+    <result column="mileage" property="mileage" jdbcType="DOUBLE" />
+    <result column="inputperson" property="inputperson" jdbcType="VARCHAR" />
+    <result column="inputtime" property="inputtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, trainnum, status, transferpri, directpri, startcity, startstation, outcenter, 
+    outpici, checi, starttime, endtime, tianshu, inpici, intcenter, endcity, endstation, 
+    transfepici, transfercenter, unitprice, mileage, inputperson, inputtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.RailwaylineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from railwayline
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from railwayline
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from railwayline
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.RailwaylineExample" >
+    delete from railwayline
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Railwayline" >
+    insert into railwayline (id, trainnum, status, 
+      transferpri, directpri, startcity, 
+      startstation, outcenter, outpici, 
+      checi, starttime, endtime, 
+      tianshu, inpici, intcenter, 
+      endcity, endstation, transfepici, 
+      transfercenter, unitprice, mileage, 
+      inputperson, inputtime)
+    values (#{id,jdbcType=VARCHAR}, #{trainnum,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{transferpri,jdbcType=VARCHAR}, #{directpri,jdbcType=VARCHAR}, #{startcity,jdbcType=VARCHAR}, 
+      #{startstation,jdbcType=VARCHAR}, #{outcenter,jdbcType=VARCHAR}, #{outpici,jdbcType=VARCHAR}, 
+      #{checi,jdbcType=VARCHAR}, #{starttime,jdbcType=TIME}, #{endtime,jdbcType=TIME}, 
+      #{tianshu,jdbcType=VARCHAR}, #{inpici,jdbcType=VARCHAR}, #{intcenter,jdbcType=VARCHAR}, 
+      #{endcity,jdbcType=VARCHAR}, #{endstation,jdbcType=VARCHAR}, #{transfepici,jdbcType=VARCHAR}, 
+      #{transfercenter,jdbcType=VARCHAR}, #{unitprice,jdbcType=DOUBLE}, #{mileage,jdbcType=DOUBLE}, 
+      #{inputperson,jdbcType=VARCHAR}, #{inputtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Railwayline" >
+    insert into railwayline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trainnum != null" >
+        trainnum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="transferpri != null" >
+        transferpri,
+      </if>
+      <if test="directpri != null" >
+        directpri,
+      </if>
+      <if test="startcity != null" >
+        startcity,
+      </if>
+      <if test="startstation != null" >
+        startstation,
+      </if>
+      <if test="outcenter != null" >
+        outcenter,
+      </if>
+      <if test="outpici != null" >
+        outpici,
+      </if>
+      <if test="checi != null" >
+        checi,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="tianshu != null" >
+        tianshu,
+      </if>
+      <if test="inpici != null" >
+        inpici,
+      </if>
+      <if test="intcenter != null" >
+        intcenter,
+      </if>
+      <if test="endcity != null" >
+        endcity,
+      </if>
+      <if test="endstation != null" >
+        endstation,
+      </if>
+      <if test="transfepici != null" >
+        transfepici,
+      </if>
+      <if test="transfercenter != null" >
+        transfercenter,
+      </if>
+      <if test="unitprice != null" >
+        unitprice,
+      </if>
+      <if test="mileage != null" >
+        mileage,
+      </if>
+      <if test="inputperson != null" >
+        inputperson,
+      </if>
+      <if test="inputtime != null" >
+        inputtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="trainnum != null" >
+        #{trainnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="transferpri != null" >
+        #{transferpri,jdbcType=VARCHAR},
+      </if>
+      <if test="directpri != null" >
+        #{directpri,jdbcType=VARCHAR},
+      </if>
+      <if test="startcity != null" >
+        #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="startstation != null" >
+        #{startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="outcenter != null" >
+        #{outcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="outpici != null" >
+        #{outpici,jdbcType=VARCHAR},
+      </if>
+      <if test="checi != null" >
+        #{checi,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIME},
+      </if>
+      <if test="tianshu != null" >
+        #{tianshu,jdbcType=VARCHAR},
+      </if>
+      <if test="inpici != null" >
+        #{inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="intcenter != null" >
+        #{intcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="endcity != null" >
+        #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="endstation != null" >
+        #{endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="transfepici != null" >
+        #{transfepici,jdbcType=VARCHAR},
+      </if>
+      <if test="transfercenter != null" >
+        #{transfercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null" >
+        #{unitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="mileage != null" >
+        #{mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="inputperson != null" >
+        #{inputperson,jdbcType=VARCHAR},
+      </if>
+      <if test="inputtime != null" >
+        #{inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.RailwaylineExample" resultType="java.lang.Integer" >
+    select count(*) from railwayline
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update railwayline
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainnum != null" >
+        trainnum = #{record.trainnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.transferpri != null" >
+        transferpri = #{record.transferpri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.directpri != null" >
+        directpri = #{record.directpri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startcity != null" >
+        startcity = #{record.startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startstation != null" >
+        startstation = #{record.startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outcenter != null" >
+        outcenter = #{record.outcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outpici != null" >
+        outpici = #{record.outpici,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checi != null" >
+        checi = #{record.checi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=TIME},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIME},
+      </if>
+      <if test="record.tianshu != null" >
+        tianshu = #{record.tianshu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inpici != null" >
+        inpici = #{record.inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intcenter != null" >
+        intcenter = #{record.intcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endcity != null" >
+        endcity = #{record.endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endstation != null" >
+        endstation = #{record.endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfepici != null" >
+        transfepici = #{record.transfepici,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfercenter != null" >
+        transfercenter = #{record.transfercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitprice != null" >
+        unitprice = #{record.unitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mileage != null" >
+        mileage = #{record.mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inputperson != null" >
+        inputperson = #{record.inputperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputtime != null" >
+        inputtime = #{record.inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update railwayline
+    set id = #{record.id,jdbcType=VARCHAR},
+      trainnum = #{record.trainnum,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      transferpri = #{record.transferpri,jdbcType=VARCHAR},
+      directpri = #{record.directpri,jdbcType=VARCHAR},
+      startcity = #{record.startcity,jdbcType=VARCHAR},
+      startstation = #{record.startstation,jdbcType=VARCHAR},
+      outcenter = #{record.outcenter,jdbcType=VARCHAR},
+      outpici = #{record.outpici,jdbcType=VARCHAR},
+      checi = #{record.checi,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIME},
+      endtime = #{record.endtime,jdbcType=TIME},
+      tianshu = #{record.tianshu,jdbcType=VARCHAR},
+      inpici = #{record.inpici,jdbcType=VARCHAR},
+      intcenter = #{record.intcenter,jdbcType=VARCHAR},
+      endcity = #{record.endcity,jdbcType=VARCHAR},
+      endstation = #{record.endstation,jdbcType=VARCHAR},
+      transfepici = #{record.transfepici,jdbcType=VARCHAR},
+      transfercenter = #{record.transfercenter,jdbcType=VARCHAR},
+      unitprice = #{record.unitprice,jdbcType=DOUBLE},
+      mileage = #{record.mileage,jdbcType=DOUBLE},
+      inputperson = #{record.inputperson,jdbcType=VARCHAR},
+      inputtime = #{record.inputtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Railwayline" >
+    update railwayline
+    <set >
+      <if test="trainnum != null" >
+        trainnum = #{trainnum,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="transferpri != null" >
+        transferpri = #{transferpri,jdbcType=VARCHAR},
+      </if>
+      <if test="directpri != null" >
+        directpri = #{directpri,jdbcType=VARCHAR},
+      </if>
+      <if test="startcity != null" >
+        startcity = #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="startstation != null" >
+        startstation = #{startstation,jdbcType=VARCHAR},
+      </if>
+      <if test="outcenter != null" >
+        outcenter = #{outcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="outpici != null" >
+        outpici = #{outpici,jdbcType=VARCHAR},
+      </if>
+      <if test="checi != null" >
+        checi = #{checi,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIME},
+      </if>
+      <if test="tianshu != null" >
+        tianshu = #{tianshu,jdbcType=VARCHAR},
+      </if>
+      <if test="inpici != null" >
+        inpici = #{inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="intcenter != null" >
+        intcenter = #{intcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="endcity != null" >
+        endcity = #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="endstation != null" >
+        endstation = #{endstation,jdbcType=VARCHAR},
+      </if>
+      <if test="transfepici != null" >
+        transfepici = #{transfepici,jdbcType=VARCHAR},
+      </if>
+      <if test="transfercenter != null" >
+        transfercenter = #{transfercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="unitprice != null" >
+        unitprice = #{unitprice,jdbcType=DOUBLE},
+      </if>
+      <if test="mileage != null" >
+        mileage = #{mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="inputperson != null" >
+        inputperson = #{inputperson,jdbcType=VARCHAR},
+      </if>
+      <if test="inputtime != null" >
+        inputtime = #{inputtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Railwayline" >
+    update railwayline
+    set trainnum = #{trainnum,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      transferpri = #{transferpri,jdbcType=VARCHAR},
+      directpri = #{directpri,jdbcType=VARCHAR},
+      startcity = #{startcity,jdbcType=VARCHAR},
+      startstation = #{startstation,jdbcType=VARCHAR},
+      outcenter = #{outcenter,jdbcType=VARCHAR},
+      outpici = #{outpici,jdbcType=VARCHAR},
+      checi = #{checi,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIME},
+      endtime = #{endtime,jdbcType=TIME},
+      tianshu = #{tianshu,jdbcType=VARCHAR},
+      inpici = #{inpici,jdbcType=VARCHAR},
+      intcenter = #{intcenter,jdbcType=VARCHAR},
+      endcity = #{endcity,jdbcType=VARCHAR},
+      endstation = #{endstation,jdbcType=VARCHAR},
+      transfepici = #{transfepici,jdbcType=VARCHAR},
+      transfercenter = #{transfercenter,jdbcType=VARCHAR},
+      unitprice = #{unitprice,jdbcType=DOUBLE},
+      mileage = #{mileage,jdbcType=DOUBLE},
+      inputperson = #{inputperson,jdbcType=VARCHAR},
+      inputtime = #{inputtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

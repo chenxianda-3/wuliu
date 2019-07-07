@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.FendanbillMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Fendanbill" >
+    <id column="workorder_id" property="workorderId" jdbcType="VARCHAR" />
+    <id column="transfercenter" property="transfercenter" jdbcType="VARCHAR" />
+    <result column="deliveryunit_id" property="deliveryunitId" jdbcType="VARCHAR" />
+    <result column="timelimit" property="timelimit" jdbcType="INTEGER" />
+    <result column="inpici" property="inpici" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="fendantime" property="fendantime" jdbcType="TIMESTAMP" />
+    <result column="fendanpeople" property="fendanpeople" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workorder_id, transfercenter, deliveryunit_id, timelimit, inpici, address, status, 
+    fendantime, fendanpeople
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.FendanbillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fendanbill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.FendanbillKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from fendanbill
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+      and transfercenter = #{transfercenter,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.com.lingnan.pojo.FendanbillKey" >
+    delete from fendanbill
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+      and transfercenter = #{transfercenter,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.FendanbillExample" >
+    delete from fendanbill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Fendanbill" >
+    insert into fendanbill (workorder_id, transfercenter, deliveryunit_id, 
+      timelimit, inpici, address, 
+      status, fendantime, fendanpeople
+      )
+    values (#{workorderId,jdbcType=VARCHAR}, #{transfercenter,jdbcType=VARCHAR}, #{deliveryunitId,jdbcType=VARCHAR}, 
+      #{timelimit,jdbcType=INTEGER}, #{inpici,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{fendantime,jdbcType=TIMESTAMP}, #{fendanpeople,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Fendanbill" >
+    insert into fendanbill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workorderId != null" >
+        workorder_id,
+      </if>
+      <if test="transfercenter != null" >
+        transfercenter,
+      </if>
+      <if test="deliveryunitId != null" >
+        deliveryunit_id,
+      </if>
+      <if test="timelimit != null" >
+        timelimit,
+      </if>
+      <if test="inpici != null" >
+        inpici,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="fendantime != null" >
+        fendantime,
+      </if>
+      <if test="fendanpeople != null" >
+        fendanpeople,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workorderId != null" >
+        #{workorderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transfercenter != null" >
+        #{transfercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryunitId != null" >
+        #{deliveryunitId,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="inpici != null" >
+        #{inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="fendantime != null" >
+        #{fendantime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fendanpeople != null" >
+        #{fendanpeople,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.FendanbillExample" resultType="java.lang.Integer" >
+    select count(*) from fendanbill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+   <select id="selectAllWorkorderId" parameterType="cn.com.lingnan.pojo.FendanbillExample"  resultType="string" >
+    select workorder_id from fendanbill
+     <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update fendanbill
+    <set >
+      <if test="record.workorderId != null" >
+        workorder_id = #{record.workorderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfercenter != null" >
+        transfercenter = #{record.transfercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryunitId != null" >
+        deliveryunit_id = #{record.deliveryunitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timelimit != null" >
+        timelimit = #{record.timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.inpici != null" >
+        inpici = #{record.inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.fendantime != null" >
+        fendantime = #{record.fendantime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fendanpeople != null" >
+        fendanpeople = #{record.fendanpeople,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update fendanbill
+    set workorder_id = #{record.workorderId,jdbcType=VARCHAR},
+      transfercenter = #{record.transfercenter,jdbcType=VARCHAR},
+      deliveryunit_id = #{record.deliveryunitId,jdbcType=VARCHAR},
+      timelimit = #{record.timelimit,jdbcType=INTEGER},
+      inpici = #{record.inpici,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      fendantime = #{record.fendantime,jdbcType=TIMESTAMP},
+      fendanpeople = #{record.fendanpeople,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Fendanbill" >
+    update fendanbill
+    <set >
+      <if test="deliveryunitId != null" >
+        deliveryunit_id = #{deliveryunitId,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        timelimit = #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="inpici != null" >
+        inpici = #{inpici,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="fendantime != null" >
+        fendantime = #{fendantime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fendanpeople != null" >
+        fendanpeople = #{fendanpeople,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+      and transfercenter = #{transfercenter,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Fendanbill" >
+    update fendanbill
+    set deliveryunit_id = #{deliveryunitId,jdbcType=VARCHAR},
+      timelimit = #{timelimit,jdbcType=INTEGER},
+      inpici = #{inpici,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      fendantime = #{fendantime,jdbcType=TIMESTAMP},
+      fendanpeople = #{fendanpeople,jdbcType=VARCHAR}
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+      and transfercenter = #{transfercenter,jdbcType=VARCHAR}
+  </update>
+</mapper>

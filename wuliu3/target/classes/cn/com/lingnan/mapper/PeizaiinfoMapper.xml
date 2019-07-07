@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.PeizaiinfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Peizaiinfo" >
+    <id column="workorder_id" property="workorderId" jdbcType="VARCHAR" />
+    <result column="combine_id" property="combineId" jdbcType="VARCHAR" />
+    <result column="operateunit" property="operateunit" jdbcType="VARCHAR" />
+    <result column="peizaiway" property="peizaiway" jdbcType="CHAR" />
+    <result column="line_id" property="lineId" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="jiangshu" property="jiangshu" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="endcity" property="endcity" jdbcType="VARCHAR" />
+    <result column="timelimit" property="timelimit" jdbcType="INTEGER" />
+    <result column="peizai" property="peizai" jdbcType="VARCHAR" />
+    <result column="shouhuopeople" property="shouhuopeople" jdbcType="VARCHAR" />
+    <result column="shouhuoaddress" property="shouhuoaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    workorder_id, combine_id, operateunit, peizaiway, line_id, product, jiangshu, weight, 
+    endcity, timelimit, peizai, shouhuopeople, shouhuoaddress
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.PeizaiinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from peizaiinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from peizaiinfo
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from peizaiinfo
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.PeizaiinfoExample" >
+    delete from peizaiinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Peizaiinfo" >
+    insert into peizaiinfo (workorder_id, combine_id, operateunit, 
+      peizaiway, line_id, product, 
+      jiangshu, weight, endcity, 
+      timelimit, peizai, shouhuopeople, 
+      shouhuoaddress)
+    values (#{workorderId,jdbcType=VARCHAR}, #{combineId,jdbcType=VARCHAR}, #{operateunit,jdbcType=VARCHAR}, 
+      #{peizaiway,jdbcType=CHAR}, #{lineId,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, 
+      #{jiangshu,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{endcity,jdbcType=VARCHAR}, 
+      #{timelimit,jdbcType=INTEGER}, #{peizai,jdbcType=VARCHAR}, #{shouhuopeople,jdbcType=VARCHAR}, 
+      #{shouhuoaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Peizaiinfo" >
+    insert into peizaiinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workorderId != null" >
+        workorder_id,
+      </if>
+      <if test="combineId != null" >
+        combine_id,
+      </if>
+      <if test="operateunit != null" >
+        operateunit,
+      </if>
+      <if test="peizaiway != null" >
+        peizaiway,
+      </if>
+      <if test="lineId != null" >
+        line_id,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="jiangshu != null" >
+        jiangshu,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="endcity != null" >
+        endcity,
+      </if>
+      <if test="timelimit != null" >
+        timelimit,
+      </if>
+      <if test="peizai != null" >
+        peizai,
+      </if>
+      <if test="shouhuopeople != null" >
+        shouhuopeople,
+      </if>
+      <if test="shouhuoaddress != null" >
+        shouhuoaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workorderId != null" >
+        #{workorderId,jdbcType=VARCHAR},
+      </if>
+      <if test="combineId != null" >
+        #{combineId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateunit != null" >
+        #{operateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="peizaiway != null" >
+        #{peizaiway,jdbcType=CHAR},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangshu != null" >
+        #{jiangshu,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="endcity != null" >
+        #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="peizai != null" >
+        #{peizai,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuopeople != null" >
+        #{shouhuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuoaddress != null" >
+        #{shouhuoaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.PeizaiinfoExample" resultType="java.lang.Integer" >
+    select count(*) from peizaiinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+    <select id="selectAllWorkorderId" parameterType="cn.com.lingnan.pojo.PeizaiinfoExample"  resultType="string" >
+    select workorder_id from peizaiinfo
+     <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update peizaiinfo
+    <set >
+      <if test="record.workorderId != null" >
+        workorder_id = #{record.workorderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.combineId != null" >
+        combine_id = #{record.combineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateunit != null" >
+        operateunit = #{record.operateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.peizaiway != null" >
+        peizaiway = #{record.peizaiway,jdbcType=CHAR},
+      </if>
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.product != null" >
+        product = #{record.product,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jiangshu != null" >
+        jiangshu = #{record.jiangshu,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.endcity != null" >
+        endcity = #{record.endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timelimit != null" >
+        timelimit = #{record.timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.peizai != null" >
+        peizai = #{record.peizai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouhuopeople != null" >
+        shouhuopeople = #{record.shouhuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouhuoaddress != null" >
+        shouhuoaddress = #{record.shouhuoaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update peizaiinfo
+    set workorder_id = #{record.workorderId,jdbcType=VARCHAR},
+      combine_id = #{record.combineId,jdbcType=VARCHAR},
+      operateunit = #{record.operateunit,jdbcType=VARCHAR},
+      peizaiway = #{record.peizaiway,jdbcType=CHAR},
+      line_id = #{record.lineId,jdbcType=VARCHAR},
+      product = #{record.product,jdbcType=VARCHAR},
+      jiangshu = #{record.jiangshu,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      endcity = #{record.endcity,jdbcType=VARCHAR},
+      timelimit = #{record.timelimit,jdbcType=INTEGER},
+      peizai = #{record.peizai,jdbcType=VARCHAR},
+      shouhuopeople = #{record.shouhuopeople,jdbcType=VARCHAR},
+      shouhuoaddress = #{record.shouhuoaddress,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Peizaiinfo" >
+    update peizaiinfo
+    <set >
+      <if test="combineId != null" >
+        combine_id = #{combineId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateunit != null" >
+        operateunit = #{operateunit,jdbcType=VARCHAR},
+      </if>
+      <if test="peizaiway != null" >
+        peizaiway = #{peizaiway,jdbcType=CHAR},
+      </if>
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="jiangshu != null" >
+        jiangshu = #{jiangshu,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="endcity != null" >
+        endcity = #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        timelimit = #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="peizai != null" >
+        peizai = #{peizai,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuopeople != null" >
+        shouhuopeople = #{shouhuopeople,jdbcType=VARCHAR},
+      </if>
+      <if test="shouhuoaddress != null" >
+        shouhuoaddress = #{shouhuoaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Peizaiinfo" >
+    update peizaiinfo
+    set combine_id = #{combineId,jdbcType=VARCHAR},
+      operateunit = #{operateunit,jdbcType=VARCHAR},
+      peizaiway = #{peizaiway,jdbcType=CHAR},
+      line_id = #{lineId,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      jiangshu = #{jiangshu,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      endcity = #{endcity,jdbcType=VARCHAR},
+      timelimit = #{timelimit,jdbcType=INTEGER},
+      peizai = #{peizai,jdbcType=VARCHAR},
+      shouhuopeople = #{shouhuopeople,jdbcType=VARCHAR},
+      shouhuoaddress = #{shouhuoaddress,jdbcType=VARCHAR}
+    where workorder_id = #{workorderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

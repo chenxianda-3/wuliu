@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.RoutebillMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Routebill" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="CHAR" />
+    <result column="startprovince" property="startprovince" jdbcType="VARCHAR" />
+    <result column="startcity" property="startcity" jdbcType="VARCHAR" />
+    <result column="startdistrict" property="startdistrict" jdbcType="VARCHAR" />
+    <result column="endprovince" property="endprovince" jdbcType="VARCHAR" />
+    <result column="endcity" property="endcity" jdbcType="VARCHAR" />
+    <result column="enddistrict" property="enddistrict" jdbcType="VARCHAR" />
+    <result column="timelimit" property="timelimit" jdbcType="VARCHAR" />
+    <result column="transfernode1" property="transfernode1" jdbcType="VARCHAR" />
+    <result column="transfernode2" property="transfernode2" jdbcType="VARCHAR" />
+    <result column="transfernode3" property="transfernode3" jdbcType="VARCHAR" />
+    <result column="transfernode4" property="transfernode4" jdbcType="VARCHAR" />
+    <result column="starttime" property="starttime" jdbcType="TIME" />
+    <result column="endtime" property="endtime" jdbcType="TIME" />
+    <result column="mileage" property="mileage" jdbcType="DOUBLE" />
+    <result column="routeprice" property="routeprice" jdbcType="DOUBLE" />
+    <result column="priority" property="priority" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="vol" property="vol" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, flag, startprovince, startcity, startdistrict, endprovince, endcity, enddistrict, 
+    timelimit, transfernode1, transfernode2, transfernode3, transfernode4, starttime, 
+    endtime, mileage, routeprice, priority, weight, vol
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.RoutebillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from routebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from routebill
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from routebill
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.RoutebillExample" >
+    delete from routebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Routebill" >
+    insert into routebill (id, name, flag, 
+      startprovince, startcity, startdistrict, 
+      endprovince, endcity, enddistrict, 
+      timelimit, transfernode1, transfernode2, 
+      transfernode3, transfernode4, starttime, 
+      endtime, mileage, routeprice, 
+      priority, weight, vol
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{flag,jdbcType=CHAR}, 
+      #{startprovince,jdbcType=VARCHAR}, #{startcity,jdbcType=VARCHAR}, #{startdistrict,jdbcType=VARCHAR}, 
+      #{endprovince,jdbcType=VARCHAR}, #{endcity,jdbcType=VARCHAR}, #{enddistrict,jdbcType=VARCHAR}, 
+      #{timelimit,jdbcType=VARCHAR}, #{transfernode1,jdbcType=VARCHAR}, #{transfernode2,jdbcType=VARCHAR}, 
+      #{transfernode3,jdbcType=VARCHAR}, #{transfernode4,jdbcType=VARCHAR}, #{starttime,jdbcType=TIME}, 
+      #{endtime,jdbcType=TIME}, #{mileage,jdbcType=DOUBLE}, #{routeprice,jdbcType=DOUBLE}, 
+      #{priority,jdbcType=VARCHAR}, #{weight,jdbcType=DOUBLE}, #{vol,jdbcType=DOUBLE}
+      )
+  </insert>
+  
+  
+  
+  
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Routebill" >
+    insert into routebill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="startprovince != null" >
+        startprovince,
+      </if>
+      <if test="startcity != null" >
+        startcity,
+      </if>
+      <if test="startdistrict != null" >
+        startdistrict,
+      </if>
+      <if test="endprovince != null" >
+        endprovince,
+      </if>
+      <if test="endcity != null" >
+        endcity,
+      </if>
+      <if test="enddistrict != null" >
+        enddistrict,
+      </if>
+      <if test="timelimit != null" >
+        timelimit,
+      </if>
+      <if test="transfernode1 != null" >
+        transfernode1,
+      </if>
+      <if test="transfernode2 != null" >
+        transfernode2,
+      </if>
+      <if test="transfernode3 != null" >
+        transfernode3,
+      </if>
+      <if test="transfernode4 != null" >
+        transfernode4,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="mileage != null" >
+        mileage,
+      </if>
+      <if test="routeprice != null" >
+        routeprice,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="vol != null" >
+        vol,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="startprovince != null" >
+        #{startprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="startcity != null" >
+        #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="startdistrict != null" >
+        #{startdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="endprovince != null" >
+        #{endprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="endcity != null" >
+        #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="enddistrict != null" >
+        #{enddistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        #{timelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode1 != null" >
+        #{transfernode1,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode2 != null" >
+        #{transfernode2,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode3 != null" >
+        #{transfernode3,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode4 != null" >
+        #{transfernode4,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIME},
+      </if>
+      <if test="mileage != null" >
+        #{mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="routeprice != null" >
+        #{routeprice,jdbcType=DOUBLE},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="vol != null" >
+        #{vol,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.RoutebillExample" resultType="java.lang.Integer" >
+    select count(*) from routebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update routebill
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        flag = #{record.flag,jdbcType=CHAR},
+      </if>
+      <if test="record.startprovince != null" >
+        startprovince = #{record.startprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startcity != null" >
+        startcity = #{record.startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startdistrict != null" >
+        startdistrict = #{record.startdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endprovince != null" >
+        endprovince = #{record.endprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endcity != null" >
+        endcity = #{record.endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddistrict != null" >
+        enddistrict = #{record.enddistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timelimit != null" >
+        timelimit = #{record.timelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfernode1 != null" >
+        transfernode1 = #{record.transfernode1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfernode2 != null" >
+        transfernode2 = #{record.transfernode2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfernode3 != null" >
+        transfernode3 = #{record.transfernode3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfernode4 != null" >
+        transfernode4 = #{record.transfernode4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        starttime = #{record.starttime,jdbcType=TIME},
+      </if>
+      <if test="record.endtime != null" >
+        endtime = #{record.endtime,jdbcType=TIME},
+      </if>
+      <if test="record.mileage != null" >
+        mileage = #{record.mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.routeprice != null" >
+        routeprice = #{record.routeprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vol != null" >
+        vol = #{record.vol,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update routebill
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=CHAR},
+      startprovince = #{record.startprovince,jdbcType=VARCHAR},
+      startcity = #{record.startcity,jdbcType=VARCHAR},
+      startdistrict = #{record.startdistrict,jdbcType=VARCHAR},
+      endprovince = #{record.endprovince,jdbcType=VARCHAR},
+      endcity = #{record.endcity,jdbcType=VARCHAR},
+      enddistrict = #{record.enddistrict,jdbcType=VARCHAR},
+      timelimit = #{record.timelimit,jdbcType=VARCHAR},
+      transfernode1 = #{record.transfernode1,jdbcType=VARCHAR},
+      transfernode2 = #{record.transfernode2,jdbcType=VARCHAR},
+      transfernode3 = #{record.transfernode3,jdbcType=VARCHAR},
+      transfernode4 = #{record.transfernode4,jdbcType=VARCHAR},
+      starttime = #{record.starttime,jdbcType=TIME},
+      endtime = #{record.endtime,jdbcType=TIME},
+      mileage = #{record.mileage,jdbcType=DOUBLE},
+      routeprice = #{record.routeprice,jdbcType=DOUBLE},
+      priority = #{record.priority,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      vol = #{record.vol,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Routebill" >
+    update routebill
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="startprovince != null" >
+        startprovince = #{startprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="startcity != null" >
+        startcity = #{startcity,jdbcType=VARCHAR},
+      </if>
+      <if test="startdistrict != null" >
+        startdistrict = #{startdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="endprovince != null" >
+        endprovince = #{endprovince,jdbcType=VARCHAR},
+      </if>
+      <if test="endcity != null" >
+        endcity = #{endcity,jdbcType=VARCHAR},
+      </if>
+      <if test="enddistrict != null" >
+        enddistrict = #{enddistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null" >
+        timelimit = #{timelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode1 != null" >
+        transfernode1 = #{transfernode1,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode2 != null" >
+        transfernode2 = #{transfernode2,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode3 != null" >
+        transfernode3 = #{transfernode3,jdbcType=VARCHAR},
+      </if>
+      <if test="transfernode4 != null" >
+        transfernode4 = #{transfernode4,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIME},
+      </if>
+      <if test="mileage != null" >
+        mileage = #{mileage,jdbcType=DOUBLE},
+      </if>
+      <if test="routeprice != null" >
+        routeprice = #{routeprice,jdbcType=DOUBLE},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="vol != null" >
+        vol = #{vol,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Routebill" >
+    update routebill
+    set name = #{name,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=CHAR},
+      startprovince = #{startprovince,jdbcType=VARCHAR},
+      startcity = #{startcity,jdbcType=VARCHAR},
+      startdistrict = #{startdistrict,jdbcType=VARCHAR},
+      endprovince = #{endprovince,jdbcType=VARCHAR},
+      endcity = #{endcity,jdbcType=VARCHAR},
+      enddistrict = #{enddistrict,jdbcType=VARCHAR},
+      timelimit = #{timelimit,jdbcType=VARCHAR},
+      transfernode1 = #{transfernode1,jdbcType=VARCHAR},
+      transfernode2 = #{transfernode2,jdbcType=VARCHAR},
+      transfernode3 = #{transfernode3,jdbcType=VARCHAR},
+      transfernode4 = #{transfernode4,jdbcType=VARCHAR},
+      starttime = #{starttime,jdbcType=TIME},
+      endtime = #{endtime,jdbcType=TIME},
+      mileage = #{mileage,jdbcType=DOUBLE},
+      routeprice = #{routeprice,jdbcType=DOUBLE},
+      priority = #{priority,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=DOUBLE},
+      vol = #{vol,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

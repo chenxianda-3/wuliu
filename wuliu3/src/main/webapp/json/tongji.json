@@ -1,0 +1,4 @@
+[
+		{ "id":"141", "pId":"0", "name":"工作单收入统计",  "page":"/staff/findBypageUi"},
+		{ "id":"142", "pId":"0", "name":"业务量统计","page":"/region/findBypageUi"}
+]

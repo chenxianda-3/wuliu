@@ -1,0 +1,8 @@
+[
+		{ "id":"1", "pId":"0", "name":"入库" ,"page":"/rukubill/findBypageUi"},
+		{ "id":"2", "pId":"0", "name":"出库" ,"page":"/chukubill/findBypageUi"},
+		{ "id":"3", "pId":"0", "name":"合包" ,"page":"/combinebill/findBypageUi"},
+		{ "id":"4", "pId":"0", "name":"拆包" ,"page":""}
+		
+		
+]

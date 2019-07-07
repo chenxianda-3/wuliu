@@ -1,0 +1,6 @@
+[
+		{ "id":"112", "pId":"0", "name":"取派员设置",  "page":"/staff/findBypageUi"},
+		{ "id":"113", "pId":"0", "name":"区域设置","page":"/region/findBypageUi"},
+		{ "id":"114", "pId":"0", "name":"管理分区", "page":"/subarea/findBypageUi"},
+		{ "id":"115", "pId":"0", "name":"管理定区","page":"/decidedzone/findBypageUi"}
+]

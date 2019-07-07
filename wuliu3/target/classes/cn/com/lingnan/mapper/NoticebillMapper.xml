@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.lingnan.mapper.NoticebillMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.lingnan.pojo.Noticebill" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="staff_id" property="staffId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="delegater" property="delegater" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="pickaddress" property="pickaddress" jdbcType="VARCHAR" />
+    <result column="arrivecity" property="arrivecity" jdbcType="VARCHAR" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="pickdate" property="pickdate" jdbcType="DATE" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="volume" property="volume" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="ordertype" property="ordertype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, staff_id, user_id, customer_name, delegater, telephone, pickaddress, arrivecity, 
+    product, pickdate, weight, volume, remark, ordertype
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.lingnan.pojo.NoticebillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from noticebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from noticebill
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from noticebill
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.lingnan.pojo.NoticebillExample" >
+    delete from noticebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.lingnan.pojo.Noticebill" >
+    insert into noticebill (id, staff_id, user_id, 
+      customer_name, delegater, telephone, 
+      pickaddress, arrivecity, product, 
+      pickdate, weight, volume, 
+      remark, ordertype)
+    values (#{id,jdbcType=VARCHAR}, #{staffId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{customerName,jdbcType=VARCHAR}, #{delegater,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{pickaddress,jdbcType=VARCHAR}, #{arrivecity,jdbcType=VARCHAR}, #{product,jdbcType=VARCHAR}, 
+      #{pickdate,jdbcType=DATE}, #{weight,jdbcType=DOUBLE}, #{volume,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{ordertype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.lingnan.pojo.Noticebill" >
+    insert into noticebill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="delegater != null" >
+        delegater,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="pickaddress != null" >
+        pickaddress,
+      </if>
+      <if test="arrivecity != null" >
+        arrivecity,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="pickdate != null" >
+        pickdate,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="ordertype != null" >
+        ordertype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null" >
+        #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="delegater != null" >
+        #{delegater,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="pickaddress != null" >
+        #{pickaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivecity != null" >
+        #{arrivecity,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        #{pickdate,jdbcType=DATE},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.lingnan.pojo.NoticebillExample" resultType="java.lang.Integer" >
+    select count(*) from noticebill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update noticebill
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null" >
+        customer_name = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delegater != null" >
+        delegater = #{record.delegater,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pickaddress != null" >
+        pickaddress = #{record.pickaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrivecity != null" >
+        arrivecity = #{record.arrivecity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.product != null" >
+        product = #{record.product,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pickdate != null" >
+        pickdate = #{record.pickdate,jdbcType=DATE},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.volume != null" >
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordertype != null" >
+        ordertype = #{record.ordertype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update noticebill
+    set id = #{record.id,jdbcType=VARCHAR},
+      staff_id = #{record.staffId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      customer_name = #{record.customerName,jdbcType=VARCHAR},
+      delegater = #{record.delegater,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      pickaddress = #{record.pickaddress,jdbcType=VARCHAR},
+      arrivecity = #{record.arrivecity,jdbcType=VARCHAR},
+      product = #{record.product,jdbcType=VARCHAR},
+      pickdate = #{record.pickdate,jdbcType=DATE},
+      weight = #{record.weight,jdbcType=DOUBLE},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      ordertype = #{record.ordertype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.lingnan.pojo.Noticebill" >
+    update noticebill
+    <set >
+      <if test="staffId != null" >
+        staff_id = #{staffId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="delegater != null" >
+        delegater = #{delegater,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="pickaddress != null" >
+        pickaddress = #{pickaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivecity != null" >
+        arrivecity = #{arrivecity,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="pickdate != null" >
+        pickdate = #{pickdate,jdbcType=DATE},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null" >
+        ordertype = #{ordertype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.lingnan.pojo.Noticebill" >
+    update noticebill
+    set staff_id = #{staffId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      delegater = #{delegater,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      pickaddress = #{pickaddress,jdbcType=VARCHAR},
+      arrivecity = #{arrivecity,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      pickdate = #{pickdate,jdbcType=DATE},
+      weight = #{weight,jdbcType=DOUBLE},
+      volume = #{volume,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      ordertype = #{ordertype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
